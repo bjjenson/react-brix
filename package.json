@@ -8,7 +8,8 @@
   "author": "Bryan Jenson",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --env.mode production --config ./config/brix.config.js"
+    "build": "webpack --env.mode production --config ./config/brix.config.js",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "fetch-suspense": "^1.0.1",
