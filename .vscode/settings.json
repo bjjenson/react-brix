@@ -3,7 +3,9 @@
   "eslint.autoFixOnSave": true,
   "eslint.options": {
     "configFile": ".eslintrc",
-    "ignorePattern": []
+    "ignorePattern": [
+      "dist",
+    ]
   },
   "files.exclude": {
     "**/.git": true,
