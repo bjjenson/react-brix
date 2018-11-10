@@ -1,5 +1,5 @@
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin') //eslint-disable-line
+const CleanWebpackPlugin = require('clean-webpack-plugin') //eslint-disable-line
 
 module.exports = () => ({
   plugins: [
