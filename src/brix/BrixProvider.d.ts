@@ -5,6 +5,6 @@ export interface BrixProps extends React.HTMLAttributes<HTMLDivElement> {
   value: any,
 }
 
-export type BrixContext = React.Context<{ state: Map }>
+export type BrixContext = React.Context<{ state: Map<string, any> }>
 export type BrixProvider = React.ComponentType<BrixProps>
-export type BrixConsumer = React.Consumer
+export type BrixConsumer = React.Consumer<BrixProps>
