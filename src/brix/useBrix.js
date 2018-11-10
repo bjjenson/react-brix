@@ -1,4 +1,4 @@
-import { fromJS } from 'perpetual-js'
+import { fromJS } from 'immutable'
 import { useContext } from 'react'
 import { BrixContext } from './BrixProvider'
 

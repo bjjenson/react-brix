@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "fetch-suspense": "^1.0.1",
-    "immutable": "^3.8.2",
-    "perpetual-js": "^1.0.2",
+    "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.6.2",
     "react": "^16.7.0-alpha.0",
     "react-app-polyfill": "^0.1.3",

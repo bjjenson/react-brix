@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Map } from 'perpetual-js'
+import { Map } from 'immutable'
 
 export const BrixContext = React.createContext({
   state: Map(),
