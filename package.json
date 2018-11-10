@@ -1,6 +1,6 @@
 {
   "name": "react-brix",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -14,7 +14,9 @@
   "scripts": {
     "build": "webpack --env.mode production --config ./config/webpack.config.js",
     "start": "webpack-dev-server --env.mode development --color true --config ./config/webpack.config.js --open",
-    "prepublish": "babel src/brix --out-dir dist"
+    "clean": "yarn cleandir dist",
+    "copy:ts": "yarn copyfiles --flat src/brix/*.d.ts dist",
+    "prepublish": "yarn clean && yarn copy:ts && babel src/brix --out-dir dist"
   },
   "dependencies": {
     "error-overlay-webpack-plugin": "^0.1.5",
@@ -45,9 +47,11 @@
     "babel-loader": "^8.0.4",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
+    "clean-dir": "^1.0.3",
     "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^4.5.4",
+    "copyfiles": "^2.1.0",
     "css-loader": "^1.0.0",
     "dotenv-webpack": "^1.5.7",
     "eslint": "^5.8.0",
