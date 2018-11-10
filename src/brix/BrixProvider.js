@@ -6,7 +6,7 @@ export const BrixContext = React.createContext({
   state: Map(),
 })
 
-export const BrixProvider = ({ value = Map(), children }) => {
+export const BrixProvider = ({ value, children }) => {
   const [state, setState] = useState(value)
 
   return (
@@ -18,6 +18,10 @@ export const BrixProvider = ({ value = Map(), children }) => {
 
 BrixProvider.propTypes = {
   value: PropTypes.object,
+}
+
+BrixProvider.defaultProps = {
+  value: Map(),
 }
 
 export const BrixConsumer = BrixContext.Consumer
