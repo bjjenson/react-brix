@@ -12,10 +12,12 @@
   "author": "Bryan Jenson",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --mode production --config ./config/brix.config.js",
+    "build": "webpack --env.mode production --config ./config/webpack.config.js",
+    "start": "webpack-dev-server --env.mode development --color true --config ./config/webpack.config.js --open",
     "prepublish": "babel src/brix --out-dir dist"
   },
   "dependencies": {
+    "error-overlay-webpack-plugin": "^0.1.5",
     "fetch-suspense": "^1.0.1",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.6.2",
@@ -41,11 +43,13 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
     "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^4.5.4",
     "css-loader": "^1.0.0",
+    "dotenv-webpack": "^1.5.7",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-react-app": "^3.0.4",

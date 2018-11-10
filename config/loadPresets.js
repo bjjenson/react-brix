@@ -1,4 +1,4 @@
-const webpackMerge = require('webpack-merge')
+const webpackMerge = require('webpack-merge') //eslint-disable-line
 
 const applyPresets = (env = { presets: [] }) => {
   const presets = env.presets || []

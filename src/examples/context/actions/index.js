@@ -1,0 +1,1 @@
+export { getAddress } from './getAddress'

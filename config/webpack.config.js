@@ -2,7 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const getVars = require('./env')
 const presetConfig = require('./loadPresets')
@@ -16,7 +15,7 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
       mode,
       entry: [
         'babel-polyfill',
-        './src/client/index.js',
+        './src/examples/index.js',
       ],
       module: {
         rules: [
@@ -69,14 +68,13 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
         new HtmlWebpackPlugin({
           inject: true,
           template: './public/index.html',
-          favicon: './public/favicon.png',
+          favicon: './public/favicon.ico',
           manifest: './public/manifest.json',
         }),
         new webpack.ProgressPlugin(),
-        new CopyWebpackPlugin(['./src/client/server.js']),
       ],
       output: {
-        path: path.resolve(__dirname, '../build/client'),
+        path: path.resolve(__dirname, '../build'),
         publicPath: '/',
         filename: '[name].[hash:8].js',
         chunkFilename: '[name].[hash:8].chunk.js',
