@@ -1,9 +1,10 @@
 {
   "name": "react-brix",
-  "version": "0.1.10",
-  "main": "dist/index.js",
+  "version": "0.1.11",
+  "main": "index.js",
   "types": "dist/index.d.ts",
   "files": [
+    "index.js",
     "dist"
   ],
   "repository": {
