@@ -14,6 +14,7 @@ export const useBrixWorker = (path, worker, notSetValue) => {
 
     const result = useWorker(path, () => worker(getState))
     set(result)
+
     return {
       value: notSetValue,
     }
