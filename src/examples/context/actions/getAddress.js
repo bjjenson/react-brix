@@ -2,10 +2,10 @@ export function getAddress() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
-        street: '15662 S Broken Arrow',
-        city: 'Bluffdale',
+        street: '15 S Main',
+        city: 'Reactable',
         state: 'Utah',
-        zip: '84065',
+        zip: '84001',
       })
     }, 2000)
   })
