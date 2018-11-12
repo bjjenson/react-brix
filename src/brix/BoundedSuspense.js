@@ -2,14 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class BoundedSuspense extends React.Component {
-  state = { hasError: false }
-
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true }
-  }
-
-  componentDidCatch(error, info) {
-    console.log(error, info)
   }
 
   render() {
@@ -24,6 +18,12 @@ class BoundedSuspense extends React.Component {
         {children}
       </React.Suspense>
     )
+  }
+
+  state = { hasError: false }
+
+  componentDidCatch(error, info) {
+    console.log(error, info)
   }
 }
 
