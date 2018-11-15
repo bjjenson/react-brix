@@ -8,6 +8,7 @@ import Address from './AddressWithProps'
 
 const MyWorkingComponent = () => {
   const { value } = useBrixWorker(paths.address.get(), getAddress, Map())
+
   return (
     <Address datum={value} />
   )
