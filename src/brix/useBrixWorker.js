@@ -3,8 +3,9 @@ import { useBrix } from './useBrix'
 import { useWorker } from './useWorker'
 import { BrixContext } from './BrixProvider'
 
-export const useBrixWorker = (path, worker, notSetValue) => {
+export const useBrixWorker = (path, worker, notSetValue, transformer = v => v) => {
   const { value, set } = useBrix(path)
+
   if (value === undefined) {
 
     const getState = () => {
@@ -13,11 +14,12 @@ export const useBrixWorker = (path, worker, notSetValue) => {
     }
 
     const result = useWorker(path, () => worker(getState))
-    set(result)
+    set(transformer(result))
 
     return {
       value: notSetValue,
     }
   }
+
   return { value }
 }
