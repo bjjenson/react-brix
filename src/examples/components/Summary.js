@@ -3,9 +3,8 @@ import { BrixContext } from '../../brix'
 import { paths } from '../context'
 
 class Summary extends React.PureComponent {
-
   render() {
-    const { state } = this.context
+    const { state: { data } } = this.context
 
     return (
       <div>
@@ -13,11 +12,11 @@ class Summary extends React.PureComponent {
           Summary for
           <span>
             &nbsp;
-            {state.getIn(paths.name.first.get())}
+            {data.getIn(paths.name.first.get())}
           </span>
           <span>
             &nbsp;
-            {state.getIn(paths.name.last.get())}
+            {data.getIn(paths.name.last.get())}
           </span>
         </h5>
       </div>
