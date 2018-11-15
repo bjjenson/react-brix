@@ -5,12 +5,10 @@ import { BrixContext } from './BrixProvider'
 
 export const useBrixWorker = (path, worker, notSetValue, transformer = v => v) => {
   const { value, set } = useBrix(path)
-
+  const { state } = useContext(BrixContext)
   if (value === undefined) {
-
     const getState = () => {
-      const { state } = useContext(BrixContext)
-      return state
+      return state.data
     }
 
     const result = useWorker(path, () => worker(getState))
