@@ -1,5 +1,6 @@
-export { default as BoundedSuspense } from './BoundedSuspense'
 export { BrixConsumer, BrixProvider, BrixContext } from './BrixProvider'
+export { default as BoundedSuspense } from './BoundedSuspense'
 export { useBrix } from './useBrix'
+export { useBrixSetter } from './useBrixSetter'
 export { useBrixWorker } from './useBrixWorker'
 export { useWorker, getKey } from './useWorker'
