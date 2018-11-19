@@ -8,7 +8,7 @@ export const useBrixWorker = (path, worker, notSetValue, transformer = v => v) =
   const { state } = useContext(BrixContext)
   if (value === undefined) {
     const getState = () => {
-      return state.data
+      return state
     }
 
     const result = useWorker(path, () => worker(getState))
