@@ -4,7 +4,7 @@ import { paths } from '../context'
 
 class Summary extends React.PureComponent {
   render() {
-    const { state: { data } } = this.context
+    const { state } = this.context
 
     return (
       <div>
@@ -12,11 +12,11 @@ class Summary extends React.PureComponent {
           Summary for
           <span>
             &nbsp;
-            {data.getIn(paths.name.first.get())}
+            {state.getIn(paths.name.first.get())}
           </span>
           <span>
             &nbsp;
-            {data.getIn(paths.name.last.get())}
+            {state.getIn(paths.name.last.get())}
           </span>
         </h5>
       </div>

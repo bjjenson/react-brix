@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import { Map } from 'immutable'
 
 export const BrixContext = React.createContext({
-  state: {
-    data: Map(),
-  },
+  state: Map(),
 })
 
 export const BrixProvider = ({ value, children }) => {
-  const [state, setState] = useState({ data: value })
+  const [state, setState] = useState(value)
 
   return (
     <BrixContext.Provider value={{ state, setState }}>
