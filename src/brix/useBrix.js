@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import { BrixContext } from './BrixProvider'
+import { getBrixContext } from './BrixProvider'
 import { coerceDataToImmutable } from './helpers'
 
 export const useBrix = (path, notSetValue) => {
-  const { state, setState } = useContext(BrixContext)
+  const { state, setState } = useContext(getBrixContext())
   const value = state.getIn(path, notSetValue)
 
   const update = updatedValue => {
