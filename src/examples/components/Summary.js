@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrixContext } from '../../brix'
+import { getBrixContext } from '../../brix'
 import { paths } from '../context'
 
 class Summary extends React.PureComponent {
@@ -24,6 +24,6 @@ class Summary extends React.PureComponent {
   }
 }
 
-Summary.contextType = BrixContext
+Summary.contextType = getBrixContext()
 
 export default Summary

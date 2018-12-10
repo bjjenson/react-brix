@@ -1,4 +1,4 @@
-export { BrixConsumer, BrixContext, BrixProps, BrixProvider } from './BrixProvider'
+export { BrixProps, BrixProvider, getBrixConsumer, getBrixContext } from './BrixProvider'
 export { useBrix } from './useBrix'
 export { useBrixSetter } from './useBrixSetter'
 export { useBrixWorker } from './useBrixWorker'

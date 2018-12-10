@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Map } from 'immutable'
 
-export const BrixContext = React.createContext({
+const BrixContext = React.createContext({
   state: Map(),
 })
 
@@ -24,4 +24,10 @@ BrixProvider.defaultProps = {
   value: Map(),
 }
 
-export const BrixConsumer = BrixContext.Consumer
+export const getBrixContext = () => {
+  return BrixContext
+}
+
+export const getBrixConsumer = () => {
+  return BrixContext.Consumer
+}

@@ -1,4 +1,4 @@
-export { BrixConsumer, BrixProvider, BrixContext } from './BrixProvider'
+export { BrixProvider, getBrixConsumer, getBrixContext } from './BrixProvider'
 export { default as BoundedSuspense } from './BoundedSuspense'
 export { useBrix } from './useBrix'
 export { useBrixSetter } from './useBrixSetter'
