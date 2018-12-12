@@ -16,18 +16,15 @@ export const useNotification = () => {
 
 const Notification = () => {
   const [message, setMessage] = React.useState('I am error')
-  const { value, set } = useNotification()
-  const [time, setTime] = React.useState(-1)
-
-  const buttonText = time > 0 ? `message in ${time}` : 'Start'
+  const { value, set, clear } = useNotification()
+  const [buttonText, setButtonText] = React.useState('Start')
 
   const handleClick = () => {
-    // if(time < 0) {
-    //   setTime(3)
-    // }
+    setButtonText('message in 2 sec')
     setTimeout(() => {
       set(message)
-    }, 3000)
+      setButtonText('Start')
+    }, 2000)
   }
 
   return (
@@ -36,6 +33,7 @@ const Notification = () => {
       <input type='text' onChange={e => setMessage(e.target.value)} value={message} />
       <button type='button' onClick={handleClick}>{buttonText}</button>
       <h4>{value.get('message')}</h4>
+      {value.get('message') && <button type='button' onClick={clear}>Clear</button>}
     </div>
   )
 }
