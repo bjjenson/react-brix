@@ -3,10 +3,10 @@ import { getBrixContext } from './BrixProvider'
 import { coerceDataToImmutable } from './helpers'
 
 export const useBrixSetter = () => {
-  const { setState } = useContext(getBrixContext())
+  const { setBrixState } = useContext(getBrixContext())
 
   const set = (path, updatedValue) => {
-    return setState(state =>
+    return setBrixState(state =>
       state.setIn(path, coerceDataToImmutable(updatedValue))
     )
   }

@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Map } from 'immutable'
 
-const BrixContext = React.createContext({
-  state: Map(),
-})
+const BrixContext = React.createContext()
 
 export const BrixProvider = ({ value, children }) => {
-  const [state, setState] = useState(value)
+  const [state, setBrixState] = useState(value)
 
   return (
-    <BrixContext.Provider value={{ state, setState }}>
+    <BrixContext.Provider value={{ state, setBrixState }}>
       {children}
     </BrixContext.Provider>
   )
