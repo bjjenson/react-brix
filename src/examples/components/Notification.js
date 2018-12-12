@@ -17,14 +17,10 @@ export const useNotification = () => {
 const Notification = () => {
   const [message, setMessage] = React.useState('I am error')
   const { value, set, clear } = useNotification()
-  const [buttonText, setButtonText] = React.useState('Start')
+  const [buttonText] = React.useState('Start')
 
   const handleClick = () => {
-    setButtonText('message in 2 sec')
-    setTimeout(() => {
-      set(message)
-      setButtonText('Start')
-    }, 2000)
+    set(message)
   }
 
   return (
