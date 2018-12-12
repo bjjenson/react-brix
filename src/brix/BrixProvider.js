@@ -24,10 +24,10 @@ BrixProvider.defaultProps = {
   value: Map(),
 }
 
-export const getBrixContext = () => {
+export function getBrixContext() {
   return BrixContext
 }
 
-export const getBrixConsumer = () => {
+export function getBrixConsumer() {
   return BrixContext.Consumer
 }
