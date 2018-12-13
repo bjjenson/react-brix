@@ -3,7 +3,15 @@ import { getBrixContext } from './BrixProvider'
 import { coerceDataToImmutable } from './helpers'
 
 export const useBrix = (path, notSetValue) => {
-  const { state, setBrixState } = useContext(getBrixContext())
+  let state, setBrixState
+  try {
+    const context = useContext(getBrixContext())
+    state = context.state
+    setBrixState = context.state
+  } catch (err) {
+    throw new Error('BrixProvider is not configured correctly in the app')
+
+  }
   const value = state.getIn(path, notSetValue)
 
   const set = updatedValue => {
@@ -18,4 +26,5 @@ export const useBrix = (path, notSetValue) => {
       onChange: e => set(e.target.value),
     },
   }
+
 }
