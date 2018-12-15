@@ -7,7 +7,7 @@ export const useBrix = (path, notSetValue) => {
   try {
     const context = useContext(getBrixContext())
     state = context.state
-    setBrixState = context.state
+    setBrixState = context.setBrixState
   } catch (err) {
     throw new Error('BrixProvider is not configured correctly in the app')
 
