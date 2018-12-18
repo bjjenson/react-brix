@@ -4,6 +4,7 @@ React-Brix
 ============
 
 React-Brix is inspired by react hooks and Redux.  I have enjoyed using Redux in my React apps for a long time.  Now with hooks this has become much easier.
+No reducers, actions or selectors needed.  Just hooks.
 
 Requirements
 ----
@@ -27,7 +28,7 @@ yarn add react-brix
 
 Benefits
 ----
-React-brix allows you to implement an immutable app-wide state machine in React without having to write reducers or selectors.  Just use a hook to get the data from your state using a path.  If the data is not assigned yet, provide an action to retrieve the data. The data will be stored in state for next time.
+React-brix allows you to implement an immutable app-wide state machine in React without having to write reducers or selectors.  Just use a hook to get the data from your state using a path.  If the data is not assigned yet, provide a connector to retrieve the data. The data will be stored in state automatically for you.
 
 Setup
 ----
