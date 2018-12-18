@@ -4,7 +4,7 @@ import { useBrix } from '../../brix'
 import { paths } from '../context'
 
 export const useNotification = () => {
-  const { value, set } = useBrix(paths.context.notification.get(), Map())
+  const [value, set] = useBrix(paths.context.notification.get(), Map())
 
   return {
     value,
