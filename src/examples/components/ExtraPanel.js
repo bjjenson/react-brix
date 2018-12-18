@@ -7,14 +7,14 @@ import Address from './AddressWithProps'
 // import Address from './Address'
 
 const MyWorkingComponent = () => {
-  const { value } = useBrixWorker(paths.address.get(), getAddress, Map())
-  const { set } = useBrix(paths.address.street.get())
+  const address = useBrixWorker(paths.address.get(), getAddress, Map())
+  const [, set] = useBrix(paths.address.street.get())
   setTimeout(() => {
     set('101 s main')
   }, 3000)
 
   return (
-    <Address datum={value} />
+    <Address datum={address} />
   )
 }
 

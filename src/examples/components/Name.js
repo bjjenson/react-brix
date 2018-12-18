@@ -4,13 +4,13 @@ import { useBrix } from '../../brix'
 import { paths } from '../context'
 
 const Name = () => {
-  const firstNameState = useBrix(paths.name.first.get())
-  const lastNameState = useBrix(paths.name.last.get())
+  const [firstName, setFirstName] = useBrix(paths.name.first.get())
+  const [lastName, setLastName] = useBrix(paths.name.last.get())
 
   return (
     <>
-      <TextField label='First' {...firstNameState.cnx} />
-      <TextField label='Last' {...lastNameState.cnx} />
+      <TextField label='First' value={firstName} onChange={(({ target: { value } }) => setFirstName(value))} />
+      <TextField label='Last' value={lastName} onChange={(({ target: { value } }) => setLastName(value))} />
     </>
   )
 }

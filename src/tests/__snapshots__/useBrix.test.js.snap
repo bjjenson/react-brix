@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns state and setter from brixContext 1`] = `
+Array [
+  "My Name",
+  [Function],
+]
+`;
+
+exports[`set updates brix state 1`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`set updates brix state 2`] = `
+Object {
+  "isThrow": false,
+  "value": Immutable.Map {
+    "user": Immutable.Map {
+      "name": "New Name",
+    },
+  },
+}
+`;

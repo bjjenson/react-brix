@@ -10,21 +10,13 @@ export const useBrix = (path, notSetValue) => {
     setBrixState = context.setBrixState
   } catch (err) {
     throw new Error('BrixProvider is not configured correctly in the app')
-
   }
+
   const value = state.getIn(path, notSetValue)
 
   const set = updatedValue => {
     setBrixState(current => current.setIn(path, coerceDataToImmutable(updatedValue)))
   }
 
-  return {
-    value,
-    set,
-    cnx: {
-      value,
-      onChange: e => set(e.target.value),
-    },
-  }
-
+  return [value, set]
 }

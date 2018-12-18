@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`brix value is undefined return notSetValue 1`] = `Immutable.Map {}`;
+
+exports[`brix value is undefined return notSetValue 2`] = `
+Array [
+  Array [
+    "path",
+    "to",
+    "value",
+  ],
+  [Function],
+]
+`;
+
+exports[`returns value from brix 1`] = `"something set"`;
+
+exports[`worker useWorker calls worker 1`] = `
+Array [
+  [Function],
+]
+`;
