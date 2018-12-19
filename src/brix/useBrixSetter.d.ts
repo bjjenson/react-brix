@@ -1,3 +1,1 @@
-export function useBrixSetter(): {
-  set: (path: Array<string>, value: any) => void,
-}
+export function useBrixSetter(): (path: Array<string>, value: any) => void
