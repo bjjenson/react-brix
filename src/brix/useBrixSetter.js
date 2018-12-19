@@ -10,5 +10,6 @@ export const useBrixSetter = () => {
       state.setIn(path, coerceDataToImmutable(updatedValue))
     )
   }
+
   return set
 }
