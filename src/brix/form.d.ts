@@ -36,21 +36,24 @@ export interface IFormTextFieldProps {
   onFocus: Function
 }
 
-export interface IFormFieldReturn {
-  props: IFormTextFieldProps
-  validate: () => bool
-}
-
 export interface IForm {
   [key: String]: IFormTextFieldProps
   Form: React.Component
   submit: Function
 }
 
+export interface IFormErrors {
+  [key: String]: String
+}
+
+export interface IFormValues {
+  [key: String]: any
+}
+
 export interface IFormProps {
   fields: Array<IFormFieldArgs>
-  submit: (values: Object) => Promise
-  validate?: (values: Object) => Object
+  submit: (values: IFormValues) => Promise
+  validate?: (values: IFormValues) => IFormErrors
   initialValues?: Map<String, any>
 }
 
