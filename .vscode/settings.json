@@ -13,7 +13,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "dist": false,
+    "dist": true,
     "build": true,
   },
   "files.trimTrailingWhitespace": true,
