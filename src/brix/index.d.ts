@@ -2,6 +2,7 @@ export { BrixProps, BrixProvider, getBrixConsumer, getBrixContext } from './Brix
 export { useBrix } from './useBrix'
 export { useBrixSetter } from './useBrixSetter'
 export { useBrixWorker } from './useBrixWorker'
+export { useForm } from './form'
 
 export interface ISuspense {
   fallback: React.ReactNode

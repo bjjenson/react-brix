@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { Map } from 'immutable'
 
-export interface BrixProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BrixProps {
   value: any,
 }
 
-export type BrixProvider = React.ComponentType<BrixProps>
+
+export const BrixProvider: React.ComponentType<BrixProps>
 export function getBrixContext(): React.Context<{ state: Map<string, any> }>
 export function getBrixConsumer(): React.Consumer<BrixProps>

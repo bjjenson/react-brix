@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`defaults value to false 1`] = `
+Array [
+  false,
+  Object {
+    "valueFromTarget": [Function],
+  },
+]
+`;
+
+exports[`returns all props needed 1`] = `
+Object {
+  "prop1": "prop1",
+  "prop2": "prop2",
+}
+`;
+
+exports[`sets initial values 1`] = `
+Array [
+  true,
+  Object {
+    "value": true,
+    "valueFromTarget": [Function],
+  },
+]
+`;
+
+exports[`sets initialValue from args 1`] = `
+Array [
+  false,
+  Object {
+    "value": true,
+    "valueFromTarget": [Function],
+  },
+]
+`;
