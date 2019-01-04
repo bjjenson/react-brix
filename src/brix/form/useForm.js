@@ -8,8 +8,8 @@ import {
 } from './fields'
 
 /**
- * 
- * @param  param0 { import(".").IFormProps }
+ *
+ * @param  param0 { import("../form").IFormProps }
  */
 export const useForm = ({ fields, submit, validate, initialValues = Map() }) => {
   const fieldData = fields.reduce((acc, f) => {
