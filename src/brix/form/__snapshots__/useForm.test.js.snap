@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`no submit if form validation fails 1`] = `
+Array [
+  Object {
+    "name": "",
+    "phone": "",
+  },
+]
+`;
+
+exports[`returns array of form props 1`] = `
+Object {
+  "Form": [Function],
+  "name": Object {
+    "error": false,
+    "helperText": undefined,
+    "label": "The name",
+    "onBlur": [Function],
+    "onChange": [Function],
+    "onFocus": [Function],
+    "value": "",
+  },
+  "phone": Object {
+    "error": false,
+    "helperText": undefined,
+    "label": "The phone",
+    "onBlur": [Function],
+    "onChange": [Function],
+    "onFocus": [Function],
+    "value": "",
+  },
+  "submit": [Function],
+}
+`;
+
+exports[`submit calls worker, merges with initialValues 1`] = `
+Array [
+  Object {
+    "id": "id",
+    "name": "a",
+    "phone": "b",
+  },
+]
+`;

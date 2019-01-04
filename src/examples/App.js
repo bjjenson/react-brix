@@ -3,21 +3,21 @@ import Name from './components/Name'
 import Summary from './components/Summary'
 import ExtraPanel from './components/ExtraPanel'
 import Notification from './components/Notification'
+import Form from './components/Form'
 import { BrixProvider } from '../brix'
 import { initialBrix } from './context'
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <BrixProvider value={initialBrix}>
-        <div className='App'>
-          <Name />
-          <Summary />
-          <ExtraPanel />
-          <Notification />
-        </div>
-      </BrixProvider>
-    </React.StrictMode >
+    <BrixProvider value={initialBrix}>
+      <div className='App'>
+        <Name />
+        <Summary />
+        <ExtraPanel />
+        <Notification />
+        <Form />
+      </div>
+    </BrixProvider>
   )
 }
 
