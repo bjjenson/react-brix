@@ -1,4 +1,5 @@
 import React from 'react'
+import { fromJS } from 'immutable'
 import { withStyles, TextField, Button, Switch, FormControlLabel } from '@material-ui/core' // eslint-disable-line import/no-extraneous-dependencies
 import { useForm } from '../../../brix'
 import { normalizePhone } from './normalizePhone'
@@ -30,6 +31,9 @@ const Address = ({ classes }) => {
     ],
     submit: values => console.log('submitting', values),
     validate: validateForm,
+    initialValues: fromJS({
+      isAlive: true,
+    }),
   })
 
   return (
@@ -47,6 +51,7 @@ const Address = ({ classes }) => {
     </div>
   )
 }
+
 
 const styles = {
   root: {
