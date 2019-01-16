@@ -9,7 +9,7 @@ beforeEach(() => {
     value: true,
   }
 
-  useFormField.mockReturnValue({ prop1: 'prop1', prop2: 'prop2' })
+  useFormField.mockReturnValue({ prop1: 'prop1', prop2: 'prop2', props: { value: true } })
 })
 
 

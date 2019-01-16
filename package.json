@@ -18,10 +18,9 @@
     "clean": "yarn cleandir dist",
     "test": "yarn jest --watch",
     "copy:ts": "yarn copyfiles --flat src/brix/*.d.ts dist",
-    "prepublish": "yarn clean && yarn copy:ts && babel src/brix --out-dir dist"
+    "prepublish": "yarn clean && yarn copy:ts && babel src/brix --ignore **/*.test.js --out-dir dist"
   },
   "dependencies": {
-    "error-overlay-webpack-plugin": "^0.1.5",
     "fetch-suspense": "^1.0.1",
     "immutable": "^4.0.0-rc.12",
     "prop-types": "^15.6.2",
@@ -57,6 +56,7 @@
     "copyfiles": "^2.1.0",
     "css-loader": "^1.0.0",
     "dotenv-webpack": "^1.5.7",
+    "error-overlay-webpack-plugin": "^0.1.5",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-react-app": "^3.0.4",

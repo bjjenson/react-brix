@@ -12,5 +12,7 @@ export const useBooleanField = (args = {}, initial) => {
 
   const valueFromTarget = target => target.checked
 
-  return useFormField(initialValue, { ...args, valueFromTarget })
+  const result = useFormField(initialValue, { ...args, valueFromTarget })
+  result.props.checked = result.props.value
+  return result
 }
