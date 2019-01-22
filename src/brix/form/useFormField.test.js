@@ -125,3 +125,9 @@ test('handleChange uses valueFromTarget to get value from target', () => {
   actual.props.onChange({ target: { nonValue: 'yolo' } })
   expect(setState.mock.calls[0]).toMatchSnapshot()
 })
+
+test('setValue updates the value of the field', () => {
+  const { setValue } = useFormField(value)
+  setValue('new value')
+  expect(setState.mock.calls[0]).toMatchSnapshot()
+})

@@ -12,6 +12,7 @@ Object {
     "value": "the value",
   },
   "setValidationResult": [Function],
+  "setValue": [Function],
   "validate": [Function],
 }
 `;
@@ -21,7 +22,7 @@ Array [
   Object {
     "error": false,
     "helperText": "the help",
-    "pristine": true,
+    "pristine": false,
     "touched": false,
     "value": "&",
   },
@@ -33,7 +34,7 @@ Array [
   Object {
     "error": false,
     "helperText": undefined,
-    "pristine": true,
+    "pristine": false,
     "touched": false,
     "value": "yolo",
   },
@@ -52,8 +53,21 @@ Object {
     "value": "the value",
   },
   "setValidationResult": [Function],
+  "setValue": [Function],
   "validate": [Function],
 }
+`;
+
+exports[`setValue updates the value of the field 1`] = `
+Array [
+  Object {
+    "error": false,
+    "helperText": undefined,
+    "pristine": false,
+    "touched": false,
+    "value": "new value",
+  },
+]
 `;
 
 exports[`sets initial values 1`] = `
@@ -85,7 +99,7 @@ Array [
   Object {
     "error": false,
     "helperText": undefined,
-    "pristine": true,
+    "pristine": false,
     "touched": false,
     "value": "1",
   },
@@ -109,7 +123,7 @@ Array [
   Object {
     "error": true,
     "helperText": "i am error",
-    "pristine": true,
+    "pristine": false,
     "touched": true,
     "value": "1",
   },

@@ -4,11 +4,12 @@ import { formatLabel } from './formatLabel'
 /**
  * @param  args { import(".").IFormFieldArgs}
  */
-export const useFormField = (value, args = {}) => {
+export const useFormField = (initialValue, args = {}) => {
   const requiredMessage = args.requiredMessage || 'Required'
 
+
   const [state, setState] = useState({
-    value,
+    value: initialValue,
     error: false,
     helperText: args.helperText,
     pristine: true,
@@ -34,15 +35,19 @@ export const useFormField = (value, args = {}) => {
       }
   }
 
+  const setValue = updatedValue => {
+    setState({
+      ...state,
+      value: updatedValue,
+      pristine: updatedValue === initialValue,
+      ...tryValidate(updatedValue, state.touched),
+    })
+  }
+
   const handleChange = ({ target }) => {
     const value = args.valueFromTarget ? args.valueFromTarget(target) : target.value
     const coercedValue = args.normalize ? args.normalize(value) : value
-    setState({
-      ...state,
-      value: coercedValue,
-      pristine: coercedValue === value,
-      ...tryValidate(coercedValue, state.touched),
-    })
+    setValue(coercedValue)
   }
 
   const onBlur = () => {
@@ -83,7 +88,8 @@ export const useFormField = (value, args = {}) => {
       onChange: handleChange,
       onFocus,
     },
-    validate,
     setValidationResult,
+    setValue,
+    validate,
   }
 }

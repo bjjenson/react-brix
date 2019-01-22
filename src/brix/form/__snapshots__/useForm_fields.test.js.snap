@@ -87,6 +87,12 @@ Array [
 ]
 `;
 
+exports[`text setValue updates field value 1`] = `
+Array [
+  "new value",
+]
+`;
+
 exports[`text uses text 1`] = `
 Array [
   Object {
