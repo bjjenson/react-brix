@@ -61,8 +61,13 @@ export const useForm = ({ fields, submit, validate, initialValues = Map() }) => 
     }
   }
 
+  const setValue = (fieldName, value) => {
+    fieldData[fieldName].setValue(value)
+  }
+
   return {
     ...getFieldProps(fieldData),
+    setValue,
     submit: trySubmitForm,
     Form,
   }

@@ -9,10 +9,13 @@ import {
 
 jest.mock('./fields')
 
+const setValue = jest.fn()
+
 let fieldProps, initialValues
 beforeEach(() => {
   fieldProps = {
     props: {},
+    setValue,
     validate: jest.fn(),
   }
 
@@ -56,6 +59,16 @@ describe('text', () => {
     })
 
     expect(useTextField.mock.calls[0]).toMatchSnapshot()
+  })
+
+  test('setValue updates field value', () => {
+    const form = useForm({
+      fields: [
+        { name: 'fieldName', type: 'text', label: 'the label' },
+      ],
+    })
+    form.setValue('fieldName', 'new value')
+    expect(setValue.mock.calls[0]).toMatchSnapshot()
   })
 })
 

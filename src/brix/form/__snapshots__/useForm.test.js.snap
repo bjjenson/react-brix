@@ -30,6 +30,7 @@ Object {
     "onFocus": [Function],
     "value": "",
   },
+  "setValue": [Function],
   "submit": [Function],
 }
 `;
