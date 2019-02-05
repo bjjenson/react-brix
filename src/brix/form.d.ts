@@ -52,6 +52,7 @@ export interface IFormValues {
 
 export interface IFormProps {
   fields: Array<IFormFieldArgs>
+  setValue: (fieldName: String, value: any) => void
   submit: (values: IFormValues) => Promise
   validate?: (values: IFormValues) => IFormErrors
   initialValues?: Map<String, any>
