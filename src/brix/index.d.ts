@@ -3,7 +3,7 @@ export { useBrix } from './useBrix'
 export { useBrixSetter } from './useBrixSetter'
 export { useBrixWorker } from './useBrixWorker'
 export { useForm } from './form'
-
+export { withBoundry } from './withBoundry'
 export interface ISuspense {
   fallback: React.ReactNode
 }
