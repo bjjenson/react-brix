@@ -2,11 +2,11 @@ import React from 'react'
 import { Map } from 'immutable'
 import { useToggleState } from '../state'
 import { paths, getAddress } from '../context'
-import { useBrixWorker, useBrix, withBoundry } from '../../brix'
+import { useBrixWorker, useBrix, withBoundary } from '../../brix'
 import Address from './AddressWithProps'
 // import Address from './Address'
 
-const MyWorkingComponent = withBoundry(<div>working it...</div>)(() => {
+const MyWorkingComponent = withBoundary(<div>working it...</div>)(() => {
   const address = useBrixWorker(paths.address.get(), getAddress, Map())
   const [, set] = useBrix(paths.address.street.get())
   setTimeout(() => {
