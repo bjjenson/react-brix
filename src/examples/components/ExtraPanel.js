@@ -2,11 +2,11 @@ import React from 'react'
 import { Map } from 'immutable'
 import { useToggleState } from '../state'
 import { paths, getAddress } from '../context'
-import { useBrixWorker, useBrix, BoundedSuspense } from '../../brix'
+import { useBrixWorker, useBrix, withBoundry } from '../../brix'
 import Address from './AddressWithProps'
 // import Address from './Address'
 
-const MyWorkingComponent = () => {
+const MyWorkingComponent = withBoundry(<div>working it...</div>)(() => {
   const address = useBrixWorker(paths.address.get(), getAddress, Map())
   const [, set] = useBrix(paths.address.street.get())
   setTimeout(() => {
@@ -16,7 +16,7 @@ const MyWorkingComponent = () => {
   return (
     <Address datum={address} />
   )
-}
+})
 
 const ExtraPanel = () => {
   const { value, ...showAddressState } = useToggleState(true)
@@ -31,9 +31,7 @@ const ExtraPanel = () => {
         Address
       </button>
       {value && (
-        <BoundedSuspense fallback={<div>working it...</div>}>
-          <MyWorkingComponent />
-        </BoundedSuspense>
+        <MyWorkingComponent />
       )}
     </div>
   )
