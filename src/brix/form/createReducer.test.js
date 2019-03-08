@@ -3,6 +3,7 @@ import { useReducer, useMemo } from 'react'
 import { createReducer } from './createReducer'
 
 jest.mock('react')
+jest.useFakeTimers()
 
 let state, fields, initialValues, dispatch
 beforeEach(() => {
@@ -109,13 +110,19 @@ test('uses memo to check for initialValues change', () => {
 test('useMemo update dispatches reset', () => {
   let memoized
   dispatch = jest.fn()
+  let timeoutCB
   useMemo.mockImplementation((f) => {
     memoized = f
   })
   useReducer.mockReturnValue([state, dispatch])
+  setTimeout.mockImplementation(cb => {
+    timeoutCB = cb
+  })
 
   createReducer({ fields, initialValues })
   memoized()
+  timeoutCB()
 
+  expect(setTimeout).toHaveBeenCalled()
   expect(dispatch.mock.calls[0]).toMatchSnapshot()
 })

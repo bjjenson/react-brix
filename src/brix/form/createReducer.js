@@ -11,10 +11,13 @@ export const createReducer = ({ fields, options = {}, initialValues = Map() }) =
   const derivedState = getInitialState(fields, initialValues, options)
   const [state, dispatch] = useReducer(fieldReducer, derivedState, initState)
 
+  const json = JSON.stringify(initialValues.toJS())
   useMemo(() => {
-    dispatch(actions.reset(derivedState))
-    return initialValues
-  }, [initialValues])
+    setTimeout(() => {
+      dispatch(actions.reset(derivedState))
+    })
+    return json
+  }, [json])
 
   return [state, dispatch]
 }

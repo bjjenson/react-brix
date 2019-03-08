@@ -411,10 +411,7 @@ exports[`uses memo to check for initialValues change 1`] = `
 Array [
   [Function],
   Array [
-    Immutable.Map {
-      "first": "firstValue",
-      "second": "secondValue",
-    },
+    "{\\"first\\":\\"firstValue\\",\\"second\\":\\"secondValue\\"}",
   ],
 ]
 `;

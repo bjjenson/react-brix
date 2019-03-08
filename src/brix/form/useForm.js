@@ -40,7 +40,7 @@ export const useForm = ({ fields, submit, validate, options = {}, initialValues 
   }, {})
 
   const addField = field => {
-    const fieldState = generateDefaultFieldState(field, initialValues)
+    const fieldState = generateDefaultFieldState(field, initialValues, options)
     dispatch(actions.insertField(field.name, fieldState))
   }
 
