@@ -6,12 +6,14 @@ import {
   useSelectField,
   useTextField,
 } from './fields'
+import { createReducer } from './createReducer'
 
 jest.mock('./fields')
+jest.mock('./createReducer')
 
 const setValue = jest.fn()
 
-let fieldProps, initialValues
+let fieldProps
 beforeEach(() => {
   fieldProps = {
     props: {},
@@ -19,10 +21,18 @@ beforeEach(() => {
     validate: jest.fn(),
   }
 
-  initialValues = fromJS({
-    fieldName: 'i am initial',
+  const createState = type => fromJS({
+    fieldName: {
+      initial: {
+        type,
+      },
+      current: 'state of fieldName',
+    },
   })
 
+  createReducer.mockImplementation(({ fields }) => {
+    return [createState(fields[0].type || 'text'), 'dispatch']
+  })
   useBooleanField.mockReturnValue(fieldProps)
   useNumberField.mockReturnValue(fieldProps)
   useSelectField.mockReturnValue(fieldProps)
@@ -50,17 +60,6 @@ describe('text', () => {
     expect(useTextField.mock.calls[0]).toMatchSnapshot()
   })
 
-  test('passes initialValue', () => {
-    useForm({
-      fields: [
-        { name: 'fieldName', type: 'text', label: 'the label' },
-      ],
-      initialValues,
-    })
-
-    expect(useTextField.mock.calls[0]).toMatchSnapshot()
-  })
-
   test('setValue updates field value', () => {
     const form = useForm({
       fields: [
@@ -83,16 +82,6 @@ describe('number', () => {
     expect(useNumberField.mock.calls[0]).toMatchSnapshot()
   })
 
-  test('passes initialValue', () => {
-    useForm({
-      fields: [
-        { name: 'fieldName', type: 'number', label: 'the label' },
-      ],
-      initialValues,
-    })
-
-    expect(useNumberField.mock.calls[0]).toMatchSnapshot()
-  })
 })
 
 describe('select', () => {
@@ -106,16 +95,6 @@ describe('select', () => {
     expect(useSelectField.mock.calls[0]).toMatchSnapshot()
   })
 
-  test('passes initialValue', () => {
-    useForm({
-      fields: [
-        { name: 'fieldName', type: 'select', label: 'the label' },
-      ],
-      initialValues,
-    })
-
-    expect(useSelectField.mock.calls[0]).toMatchSnapshot()
-  })
 })
 
 describe('boolean', () => {
@@ -129,14 +108,4 @@ describe('boolean', () => {
     expect(useBooleanField.mock.calls[0]).toMatchSnapshot()
   })
 
-  test('passes initialValue', () => {
-    useForm({
-      fields: [
-        { name: 'fieldName', type: 'boolean', label: 'the label' },
-      ],
-      initialValues,
-    })
-
-    expect(useBooleanField.mock.calls[0]).toMatchSnapshot()
-  })
 })

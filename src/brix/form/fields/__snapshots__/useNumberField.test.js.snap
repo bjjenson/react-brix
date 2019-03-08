@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`defaults value to 0 1`] = `
-Array [
-  0,
-  Object {},
-]
-`;
-
 exports[`returns all props needed 1`] = `
 Object {
   "prop1": "prop1",
@@ -14,20 +7,10 @@ Object {
 }
 `;
 
-exports[`sets initial values 1`] = `
+exports[`returns all props needed 2`] = `
 Array [
-  23,
-  Object {
-    "value": 23,
-  },
-]
-`;
-
-exports[`sets initialValue from args 1`] = `
-Array [
-  false,
-  Object {
-    "value": 23,
-  },
+  "state",
+  "dispatch",
+  Object {},
 ]
 `;

@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`defaults value to empty string 1`] = `
-Array [
-  "",
-  Object {},
-]
-`;
-
 exports[`returns all props needed 1`] = `
 Object {
   "props": Object {
@@ -23,40 +16,17 @@ Object {
 }
 `;
 
-exports[`sets initial values 1`] = `
+exports[`returns all props needed 2`] = `
 Array [
-  "selected",
+  "state",
+  "dispatch",
   Object {
-    "error": "on",
-    "helperText": "the help",
-    "label": "the label",
-    "optional": false,
     "options": Array [
       Object {
         "label": "label1",
         "value": "value1",
       },
     ],
-    "value": "selected",
-  },
-]
-`;
-
-exports[`sets initialValue from form 1`] = `
-Array [
-  "i am initial",
-  Object {
-    "error": "on",
-    "helperText": "the help",
-    "label": "the label",
-    "optional": false,
-    "options": Array [
-      Object {
-        "label": "label1",
-        "value": "value1",
-      },
-    ],
-    "value": "selected",
   },
 ]
 `;

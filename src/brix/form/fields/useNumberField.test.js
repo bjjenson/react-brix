@@ -5,30 +5,13 @@ jest.mock('../useFormField')
 
 let initialArgs
 beforeEach(() => {
-  initialArgs = {
-    value: 23,
-  }
+  initialArgs = {}
 
   useFormField.mockReturnValue({ prop1: 'prop1', prop2: 'prop2' })
 })
 
-
-test('sets initial values', () => {
-  useNumberField(initialArgs)
-  expect(useFormField.mock.calls[0]).toMatchSnapshot()
-})
-
-test('sets initialValue from args', () => {
-  useNumberField(initialArgs, false)
-  expect(useFormField.mock.calls[0]).toMatchSnapshot()
-})
-
-test('defaults value to 0', () => {
-  useNumberField()
-  expect(useFormField.mock.calls[0]).toMatchSnapshot()
-})
-
 test('returns all props needed', () => {
-  const actual = useNumberField(initialArgs)
+  const actual = useNumberField('state', 'dispatch', initialArgs)
   expect(actual).toMatchSnapshot()
+  expect(useFormField.mock.calls[0]).toMatchSnapshot()
 })

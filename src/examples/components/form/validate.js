@@ -1,6 +1,4 @@
 export const validateForm = values => {
-  console.log(values)
-
   if (values.first === 'Frank') {
     return {
       first: 'You cannot be Frank',

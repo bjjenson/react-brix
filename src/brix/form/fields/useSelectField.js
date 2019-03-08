@@ -1,9 +1,10 @@
 import { useFormField } from '../useFormField'
 
-export const useSelectField = (args = {}, initial) => {
-  const initialValue = initial || args.value || ''
+export const useSelectField = (state, dispatch, args = {}) => {
 
-  const fieldProps = useFormField(initialValue, args)
+  const fieldProps = useFormField(state, dispatch, args)
   fieldProps.props.options = args.options
   return fieldProps
 }
+
+export const defaultSelectValue = ''
