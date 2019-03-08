@@ -1,18 +1,11 @@
 import { useFormField } from '../useFormField'
 
-export const useBooleanField = (args = {}, initial) => {
-  let initialValue
-  if (initial !== undefined) {
-    initialValue = initial
-  } else if (args.value !== undefined) {
-    initialValue = args.value
-  } else {
-    initialValue = false
-  }
-
+export const useBooleanField = (state, dispatch, args = {}) => {
   const valueFromTarget = target => target.checked
 
-  const result = useFormField(initialValue, { ...args, valueFromTarget })
+  const result = useFormField(state, dispatch, { ...args, valueFromTarget })
   result.props.checked = result.props.value
   return result
 }
+
+export const defaultBooleanValue = false

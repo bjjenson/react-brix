@@ -1,7 +1,7 @@
-import React from 'react'
-import { fromJS } from 'immutable'
+import React, { useState } from 'react'
+import { fromJS, Map } from 'immutable'
 import { withStyles, TextField, Button, Switch, FormControlLabel } from '@material-ui/core' // eslint-disable-line import/no-extraneous-dependencies
-import { useForm } from '../../../brix'
+import { useForm, useBrixWorker, withBoundary } from '../../../brix'
 import { normalizePhone } from './normalizePhone'
 import RadioField from './RadioField'
 import { validateForm, validatePhone } from './validate'
@@ -19,7 +19,25 @@ const SwitchField = ({ label, error, helperText, ...rest }) => {
   )
 }
 
-const Address = ({ classes }) => {
+const useInitialValues = () => {
+  const getInitialValues = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(fromJS({
+          isAlive: true,
+        }))
+      }, 2000)
+    })
+  }
+  return useBrixWorker(['form', 'values'], getInitialValues, Map())
+}
+
+const getColorField = i => ({ name: `color${i}`, label: `Color ${i + 1}` })
+
+const Address = withBoundary(<div>loading it</div>)(({ classes }) => {
+  const [colorCount, setColorCount] = useState(0)
+  const initialValues = useInitialValues()
+
   const form = useForm({
     fields: [
       { name: 'first', label: 'First' },
@@ -31,10 +49,29 @@ const Address = ({ classes }) => {
     ],
     submit: values => console.log('submitting', values),
     validate: validateForm,
-    initialValues: fromJS({
-      isAlive: true,
-    }),
+    initialValues,
   })
+
+  const colorFields = () => {
+    const fields = []
+    for (let i = 0; i < colorCount; i++) {
+      const key = `color${i}`
+      if (form[key]) {
+        fields.push(
+          <div key={key}>
+            <TextField {...form[key]} />
+            <Button onClick={() => form.removeField(key)}>X</Button>
+          </div>
+        )
+      }
+    }
+    return fields
+  }
+
+  const addColor = () => {
+    form.addField(getColorField(colorCount))
+    setColorCount(colorCount + 1)
+  }
 
   return (
     <div>
@@ -46,11 +83,13 @@ const Address = ({ classes }) => {
         <TextField {...form.mobile} />
         <RadioField {...form.gender} />
         <SwitchField {...form.isAlive} />
+        {colorFields()}
+        <Button onClick={addColor}>more</Button>
         <Button type='submit' onClick={form.submit}>Submit</Button>
       </form.Form>
     </div>
   )
-}
+})
 
 
 const styles = {

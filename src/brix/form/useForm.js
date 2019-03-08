@@ -1,5 +1,7 @@
 import { Map } from 'immutable'
 import { Form } from './Form'
+import { createReducer, generateDefaultFieldState } from './createReducer'
+import { actions } from './fieldReducer'
 import {
   useBooleanField,
   useNumberField,
@@ -8,31 +10,41 @@ import {
 } from './fields'
 
 /**
- *
  * @param  param0 { import("../form").IFormProps }
  */
 export const useForm = ({ fields, submit, validate, initialValues = Map() }) => {
-  const fieldData = fields.reduce((acc, f) => {
-    if (!f.name) throw new Error('name is required on field')
+  const [state, dispatch] = createReducer({ fields, initialValues })
 
-    const initialValue = initialValues.get(f.name)
-    switch (f.type) {
+  const fieldData = state.keySeq().reduce((acc, fieldName) => {
+    const fieldState = state.getIn([fieldName, 'current'])
+    const fieldType = state.getIn([fieldName, 'initial', 'type'])
+    const field = state.getIn([fieldName, 'initial', 'field'])
+    switch (fieldType) {
       case 'select':
-        acc[f.name] = useSelectField(f, initialValue)
+        acc[fieldName] = useSelectField(fieldState, dispatch, field)
         break
       case 'boolean':
-        acc[f.name] = useBooleanField(f, initialValue)
+        acc[fieldName] = useBooleanField(fieldState, dispatch, field)
         break
       case 'number':
-        acc[f.name] = useNumberField(f, initialValue)
+        acc[fieldName] = useNumberField(fieldState, dispatch, field)
         break
       case 'text':
       default:
-        acc[f.name] = useTextField(f, initialValue)
+        acc[fieldName] = useTextField(fieldState, dispatch, field)
         break
     }
     return acc
   }, {})
+
+  const addField = field => {
+    const fieldState = generateDefaultFieldState(field, initialValues)
+    dispatch(actions.insertField(field.name, fieldState))
+  }
+
+  const removeField = fieldName => {
+    dispatch(actions.removeField(fieldName))
+  }
 
   const tryValidateForm = () => {
     if (validate) {
@@ -47,15 +59,16 @@ export const useForm = ({ fields, submit, validate, initialValues = Map() }) => 
     let isFormValid = true
     const formResults = tryValidateForm()
     const values = Object.entries(fieldData).reduce((acc, [key, v]) => {
-      acc[key] = v.props.value
       if (formResults[key]) {
         v.setValidationResult({ error: true, helperText: formResults[key] })
         isFormValid = false
       }
+
       const isFieldValid = v.validate()
       isFormValid = isFormValid && isFieldValid
-      return acc
-    }, initialValues.toJS())
+
+      return acc.set(key, v.props.value)
+    }, initialValues)
     if (isFormValid) {
       submit(values)
     }
@@ -70,6 +83,8 @@ export const useForm = ({ fields, submit, validate, initialValues = Map() }) => 
     setValue,
     submit: trySubmitForm,
     Form,
+    addField,
+    removeField,
   }
 }
 

@@ -4,8 +4,8 @@ import { useFormField } from '../useFormField'
  * @param  args { import("..").IFormFieldArgs}
  * @param  initial String
  */
-export const useTextField = (args = {}, initial) => {
-  const initialValue = initial || args.value || ''
-
-  return useFormField(initialValue, args)
+export const useTextField = (state, dispatch, args = {}) => {
+  return useFormField(state, dispatch, args)
 }
+
+export const defaultTextValue = ''

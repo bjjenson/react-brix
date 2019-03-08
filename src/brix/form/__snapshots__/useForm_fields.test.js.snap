@@ -1,89 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`boolean passes initialValue 1`] = `
-Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "boolean",
-  },
-  "i am initial",
-]
-`;
-
 exports[`boolean uses boolean 1`] = `
 Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "boolean",
-  },
+  "state of fieldName",
+  "dispatch",
   undefined,
-]
-`;
-
-exports[`number passes initialValue 1`] = `
-Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "number",
-  },
-  "i am initial",
 ]
 `;
 
 exports[`number uses text 1`] = `
 Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "number",
-  },
+  "state of fieldName",
+  "dispatch",
   undefined,
-]
-`;
-
-exports[`select passes initialValue 1`] = `
-Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "select",
-  },
-  "i am initial",
 ]
 `;
 
 exports[`select uses select 1`] = `
 Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "select",
-  },
+  "state of fieldName",
+  "dispatch",
   undefined,
 ]
 `;
 
 exports[`text defaults to text 1`] = `
 Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-  },
+  "state of fieldName",
+  "dispatch",
   undefined,
-]
-`;
-
-exports[`text passes initialValue 1`] = `
-Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "text",
-  },
-  "i am initial",
 ]
 `;
 
@@ -95,11 +40,8 @@ Array [
 
 exports[`text uses text 1`] = `
 Array [
-  Object {
-    "label": "the label",
-    "name": "fieldName",
-    "type": "text",
-  },
+  "state of fieldName",
+  "dispatch",
   undefined,
 ]
 `;

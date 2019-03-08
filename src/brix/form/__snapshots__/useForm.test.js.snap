@@ -12,24 +12,16 @@ Array [
 exports[`returns array of form props 1`] = `
 Object {
   "Form": [Function],
+  "addField": [Function],
   "name": Object {
-    "error": false,
-    "helperText": undefined,
-    "label": "The name",
-    "onBlur": [Function],
-    "onChange": [Function],
-    "onFocus": [Function],
+    "label": "current state of name",
     "value": "",
   },
   "phone": Object {
-    "error": false,
-    "helperText": undefined,
-    "label": "The phone",
-    "onBlur": [Function],
-    "onChange": [Function],
-    "onFocus": [Function],
+    "label": "current state of phone",
     "value": "",
   },
+  "removeField": [Function],
   "setValue": [Function],
   "submit": [Function],
 }
@@ -37,10 +29,10 @@ Object {
 
 exports[`submit calls worker, merges with initialValues 1`] = `
 Array [
-  Object {
+  Immutable.Map {
+    "name": "new name",
     "id": "id",
-    "name": "a",
-    "phone": "b",
+    "phone": "new phone",
   },
 ]
 `;

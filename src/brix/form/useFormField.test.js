@@ -1,133 +1,241 @@
-import { useState } from 'react'
+import { fromJS } from 'immutable'
 import { useFormField } from './useFormField'
+import { actionTypes } from './fieldReducer'
 
 jest.mock('react')
 
-const setState = jest.fn()
-
-let initialArgs, event, value
+const dispatch = jest.fn()
+let value, initialArgs, state
 beforeEach(() => {
   value = 'the value'
   initialArgs = {
+    name: 'fieldName',
     optional: false,
     error: 'on',
     helperText: 'the help',
     label: 'the label',
   }
-  event = {
-    target: {
-      value: '&',
-    },
-  }
 
-  useState.mockImplementation(a => [a, setState])
-})
-
-test('sets initial values', () => {
-  useFormField(value, initialArgs)
-  expect(useState.mock.calls[0]).toMatchSnapshot()
+  state = fromJS({
+    value,
+    error: false,
+    pristine: true,
+    touched: false,
+    helperText: initialArgs.helperText,
+  })
 })
 
 test('returns all props needed', () => {
-  const actual = useFormField(value, initialArgs)
-  expect(actual).toMatchSnapshot()
+  expect(useFormField(state, dispatch, initialArgs)).toMatchSnapshot()
 })
 
 test('adds optional to label if not required', () => {
-  const actual = useFormField(value, { label: 'the label', optional: true })
+  const actual = useFormField(state, dispatch, { label: 'the label', optional: true })
   expect(actual).toMatchSnapshot()
 })
 
-describe('validate', () => {
-  let validate
+describe('onChange', () => {
+  let event
   beforeEach(() => {
-    validate = jest.fn()
-    initialArgs = {
-      name: 'field.name',
-      validate,
+    event = {
+      target: {
+        value: 'updated',
+      },
     }
+  })
+
+  test('dispatches change action', () => {
+    const { props: { onChange } } = useFormField(state, dispatch, initialArgs)
+    onChange(event)
+
+    expect(dispatch.mock.calls[0]).toMatchSnapshot()
+  })
+
+  test('uses valueFromTarget to coerce value if provided', () => {
+    const valueFromTarget = jest.fn()
+    valueFromTarget.mockReturnValue('updatedFromTarget')
+    const { props: { onChange } } = useFormField(state, dispatch, { ...initialArgs, valueFromTarget })
+    onChange(event)
+
+    expect(dispatch.mock.calls[0]).toMatchSnapshot()
+    expect(valueFromTarget).toHaveBeenCalledWith(event.target)
+  })
+
+  test('coerces value using normalize', () => {
+    const normalize = jest.fn()
+    normalize.mockReturnValue('normalized value')
+    const { props: { onChange } } = useFormField(state, dispatch, { ...initialArgs, normalize })
+    onChange(event)
+
+    expect(dispatch.mock.calls[0]).toMatchSnapshot()
+    expect(normalize).toHaveBeenCalledWith(event.target.value)
+  })
+})
+
+describe('validate', () => {
+  const validate = jest.fn()
+  let event
+  beforeEach(() => {
+    initialArgs = { ...initialArgs, validate }
+    event = {
+      target: {
+        value: '1',
+      },
+    }
+    state = fromJS({
+      value,
+      error: false,
+      pristine: false,
+      touched: true,
+      helperText: initialArgs.helperText,
+    })
   })
 
   test('calls validate on change', () => {
-    const actual = useFormField(value, initialArgs)
-    const e = {
-      target: {
-        value: '1',
-      },
-    }
-    actual.props.onChange(e)
-    expect(validate).toHaveBeenCalledWith('1', initialArgs.name)
+    const { props: { onChange } } = useFormField(state, dispatch, initialArgs)
+    onChange(event)
+
+    expect(validate).toHaveBeenCalledWith(event.target.value, initialArgs.name)
   })
 
-  test('does not updates state with results of validation if not "touched"', () => {
-    const actual = useFormField(value, initialArgs)
-    const e = {
-      target: {
-        value: '1',
+  test('does not set error if not "touched"', () => {
+    state = fromJS({
+      value,
+      error: false,
+      pristine: false,
+      touched: false,
+      helperText: initialArgs.helperText,
+    })
+    validate.mockReturnValue('Error here')
+
+    const { props: { onChange } } = useFormField(state, dispatch, initialArgs)
+    onChange(event)
+
+    expect(dispatch).not.toHaveBeenCalledWith({
+      type: actionTypes.validationResult,
+      payload: {
+        error: true,
+        helperText: expect.any(String),
       },
-    }
-    validate.mockReturnValue('i am error')
-    actual.props.onChange(e)
-    expect(setState.mock.calls[0]).toMatchSnapshot()
+    })
+
   })
 
-  test('updates state with results of validation if "touched"', () => {
-    useState.mockReturnValue([{ touched: true }, setState])
-    const actual = useFormField(value, initialArgs)
-    const e = {
-      target: {
-        value: '1',
-      },
-    }
+  test('sets validation result if "touched"', () => {
+    validate.mockReturnValue('Error here')
 
-    validate.mockReturnValue('i am error')
-    actual.props.onChange(e)
-    expect(setState).toHaveBeenCalledTimes(1)
-    expect(setState.mock.calls[0]).toMatchSnapshot()
+    const { props: { onChange } } = useFormField(state, dispatch, initialArgs)
+    onChange(event)
+
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.validationResult,
+      fieldName: 'fieldName',
+      payload: {
+        error: true,
+        helperText: expect.any(String),
+      },
+    })
+
   })
 
   test('validates onBlur', () => {
-    const actual = useFormField('&', { ...initialArgs })
-    actual.props.onBlur()
-    expect(validate.mock.calls[0]).toMatchSnapshot()
+    validate.mockReturnValue('Error here')
+
+    const { props: { onBlur } } = useFormField(state, dispatch, initialArgs)
+    onBlur()
+
+    expect(validate).toHaveBeenCalled()
   })
 
   test('sets required if empty on blur', () => {
-    const actual = useFormField('', { ...initialArgs, optional: false })
-    actual.props.onBlur()
-    expect(setState.mock.calls[0]).toMatchSnapshot()
+    state = fromJS({
+      value: '',
+      error: false,
+      pristine: false,
+      touched: true,
+      helperText: initialArgs.helperText,
+    })
+
+    const { props: { onBlur } } = useFormField(state, dispatch, initialArgs)
+    onBlur()
+
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.validationResult,
+      fieldName: 'fieldName',
+      payload: {
+        error: true,
+        helperText: expect.any(String),
+      },
+    })
   })
 
   test('validate directly', () => {
-    const actual = useFormField('', { ...initialArgs })
-    actual.validate()
-    expect(setState.mock.calls[0]).toMatchSnapshot()
+    state = fromJS({
+      value: '',
+      error: false,
+      pristine: false,
+      touched: false,
+      helperText: initialArgs.helperText,
+    })
+
+    const actual = useFormField(state, dispatch, initialArgs)
+
+    const isValid = actual.validate()
+
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.validationResult,
+      fieldName: 'fieldName',
+      payload: {
+        error: true,
+        helperText: 'Required',
+      },
+    })
+    expect(isValid).toBeFalsy()
+  })
+
+  test('validate directly returns true if valid', () => {
+    validate.mockReturnValue('')
+    const actual = useFormField(state, dispatch, initialArgs)
+
+    const isValid = actual.validate()
+
+    expect(isValid).toBeTruthy()
   })
 
 })
 
-test('cancels pristine if initial value changed', () => {
-  const actual = useFormField(value, initialArgs)
-  actual.props.onChange(event)
-  expect(setState.mock.calls[0]).toMatchSnapshot()
+test('setValidationResult externally', () => {
+  const { setValidationResult } = useFormField(state, dispatch, initialArgs)
+
+  setValidationResult('i am error')
+  expect(dispatch).toHaveBeenCalledWith({
+    type: actionTypes.validationResult,
+    fieldName: 'fieldName',
+    payload: {
+      error: true,
+      helperText: 'i am error',
+    },
+  })
 })
 
 test('sets touched onBlur', () => {
-  const actual = useFormField(value, initialArgs)
-  actual.props.onBlur(event)
-  expect(setState.mock.calls[0]).toMatchSnapshot()
+  const { props: { onBlur } } = useFormField(state, dispatch, initialArgs)
+  onBlur()
+
+  expect(dispatch).toHaveBeenCalledWith({
+    fieldName: 'fieldName',
+    type: actionTypes.touched,
+  })
 })
 
-test('handleChange uses valueFromTarget to get value from target', () => {
-  const valueFromTarget = target => target.nonValue
+test('setValue sets value externally', () => {
+  const { setValue } = useFormField(state, dispatch, initialArgs)
 
-  const actual = useFormField(value, { valueFromTarget })
-  actual.props.onChange({ target: { nonValue: 'yolo' } })
-  expect(setState.mock.calls[0]).toMatchSnapshot()
+  setValue('i am value')
+  expect(dispatch).toHaveBeenCalledWith({
+    type: actionTypes.updateValue,
+    fieldName: 'fieldName',
+    payload: 'i am value',
+  })
 })
 
-test('setValue updates the value of the field', () => {
-  const { setValue } = useFormField(value)
-  setValue('new value')
-  expect(setState.mock.calls[0]).toMatchSnapshot()
-})

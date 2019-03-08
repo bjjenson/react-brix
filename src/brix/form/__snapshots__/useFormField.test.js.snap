@@ -4,11 +4,10 @@ exports[`adds optional to label if not required 1`] = `
 Object {
   "props": Object {
     "error": false,
-    "helperText": undefined,
+    "helperText": "the help",
     "label": "the label (optional)",
     "onBlur": [Function],
     "onChange": [Function],
-    "onFocus": [Function],
     "value": "the value",
   },
   "setValidationResult": [Function],
@@ -17,26 +16,32 @@ Object {
 }
 `;
 
-exports[`cancels pristine if initial value changed 1`] = `
+exports[`onChange coerces value using normalize 1`] = `
 Array [
   Object {
-    "error": false,
-    "helperText": "the help",
-    "pristine": false,
-    "touched": false,
-    "value": "&",
+    "fieldName": "fieldName",
+    "payload": "normalized value",
+    "type": "updateValue",
   },
 ]
 `;
 
-exports[`handleChange uses valueFromTarget to get value from target 1`] = `
+exports[`onChange dispatches change action 1`] = `
 Array [
   Object {
-    "error": false,
-    "helperText": undefined,
-    "pristine": false,
-    "touched": false,
-    "value": "yolo",
+    "fieldName": "fieldName",
+    "payload": "updated",
+    "type": "updateValue",
+  },
+]
+`;
+
+exports[`onChange uses valueFromTarget to coerce value if provided 1`] = `
+Array [
+  Object {
+    "fieldName": "fieldName",
+    "payload": "updatedFromTarget",
+    "type": "updateValue",
   },
 ]
 `;
@@ -49,102 +54,10 @@ Object {
     "label": "the label",
     "onBlur": [Function],
     "onChange": [Function],
-    "onFocus": [Function],
     "value": "the value",
   },
   "setValidationResult": [Function],
   "setValue": [Function],
   "validate": [Function],
 }
-`;
-
-exports[`setValue updates the value of the field 1`] = `
-Array [
-  Object {
-    "error": false,
-    "helperText": undefined,
-    "pristine": false,
-    "touched": false,
-    "value": "new value",
-  },
-]
-`;
-
-exports[`sets initial values 1`] = `
-Array [
-  Object {
-    "error": false,
-    "helperText": "the help",
-    "pristine": true,
-    "touched": false,
-    "value": "the value",
-  },
-]
-`;
-
-exports[`sets touched onBlur 1`] = `
-Array [
-  Object {
-    "error": false,
-    "helperText": undefined,
-    "pristine": true,
-    "touched": true,
-    "value": "the value",
-  },
-]
-`;
-
-exports[`validate does not updates state with results of validation if not "touched" 1`] = `
-Array [
-  Object {
-    "error": false,
-    "helperText": undefined,
-    "pristine": false,
-    "touched": false,
-    "value": "1",
-  },
-]
-`;
-
-exports[`validate sets required if empty on blur 1`] = `
-Array [
-  Object {
-    "error": true,
-    "helperText": "Required",
-    "pristine": true,
-    "touched": true,
-    "value": "",
-  },
-]
-`;
-
-exports[`validate updates state with results of validation if "touched" 1`] = `
-Array [
-  Object {
-    "error": true,
-    "helperText": "i am error",
-    "pristine": false,
-    "touched": true,
-    "value": "1",
-  },
-]
-`;
-
-exports[`validate validate directly 1`] = `
-Array [
-  Object {
-    "error": true,
-    "helperText": "Required",
-    "pristine": true,
-    "touched": false,
-    "value": "",
-  },
-]
-`;
-
-exports[`validate validates onBlur 1`] = `
-Array [
-  "&",
-  "field.name",
-]
 `;

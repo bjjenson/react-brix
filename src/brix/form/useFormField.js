@@ -1,92 +1,61 @@
-import { useState } from 'react'
 import { formatLabel } from './formatLabel'
-
+import { actions } from './fieldReducer'
 /**
- * @param  args { import(".").IFormFieldArgs}
+ * @param  fieldArgs { import("../form").IFormFieldArgs}
+ * @returns {import("../form").IFormField}
  */
-export const useFormField = (initialValue, args = {}) => {
-  const requiredMessage = args.requiredMessage || 'Required'
-
-
-  const [state, setState] = useState({
-    value: initialValue,
-    error: false,
-    helperText: args.helperText,
-    pristine: true,
-    touched: false,
-  })
+export const useFormField = (state, dispatch, fieldArgs = {}) => {
+  const requiredMessage = fieldArgs.requiredMessage || 'Required'
 
   const tryValidate = (value, touched) => {
     let result
-    if (value && args.validate) {
-      result = args.validate(value, args.name)
+    if (value && fieldArgs.validate) {
+      result = fieldArgs.validate(value, fieldArgs.name)
     }
 
-    if (!Boolean(result) && !args.optional && touched && value === '') {
+    if (!Boolean(result) && !fieldArgs.optional && touched && value === '') {
       result = requiredMessage
     }
 
-    return touched ? {
-      error: Boolean(result),
-      helperText: result,
-    } : {
-        error: state.error,
-        helperText: state.helperText,
-      }
+    if (touched) {
+      dispatch(actions.validationResult(fieldArgs.name, Boolean(result), result))
+    }
+    return !Boolean(result)
   }
 
-  const setValue = updatedValue => {
-    setState({
-      ...state,
-      value: updatedValue,
-      pristine: updatedValue === initialValue,
-      ...tryValidate(updatedValue, state.touched),
-    })
+  const setValue = v => {
+    dispatch(actions.updateValue(fieldArgs.name, v))
+    tryValidate(v, state.get('touched'))
   }
 
-  const handleChange = ({ target }) => {
-    const value = args.valueFromTarget ? args.valueFromTarget(target) : target.value
-    const coercedValue = args.normalize ? args.normalize(value) : value
+  const onChange = ({ target }) => {
+    const value = fieldArgs.valueFromTarget ? fieldArgs.valueFromTarget(target) : target.value
+    const coercedValue = fieldArgs.normalize ? fieldArgs.normalize(value) : value
     setValue(coercedValue)
   }
 
   const onBlur = () => {
-    setState({
-      ...state,
-      touched: true,
-      ...tryValidate(state.value, true),
-    })
-  }
-
-  const onFocus = () => {
+    dispatch(actions.touched(fieldArgs.name))
+    tryValidate(state.get('value'), true)
   }
 
   const setValidationResult = result => {
-    setState({
-      ...state,
-      ...result,
-    })
+    dispatch(actions.validationResult(fieldArgs.name, true, result))
   }
 
   const validate = () => {
-    const result = tryValidate(state.value, true)
-    if (result.error) {
-      setValidationResult(result)
-      return false
-    }
-    return true
+    return tryValidate(state.get('value'), true)
   }
 
   return {
     props: {
-      error: state.error,
-      helperText: state.helperText,
-      label: formatLabel(args.label, args.optional),
-      value: state.value,
+      error: state.get('error'),
+      helperText: state.get('helperText'),
+      label: formatLabel(fieldArgs.label, fieldArgs.optional),
+      value: state.get('value'),
       // handlers
       onBlur,
-      onChange: handleChange,
-      onFocus,
+      onChange,
     },
     setValidationResult,
     setValue,

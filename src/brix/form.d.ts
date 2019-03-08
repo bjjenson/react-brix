@@ -33,13 +33,21 @@ export interface IFormTextFieldProps {
   // Handlers
   onBlur: Function
   onChange: Function
-  onFocus: Function
+}
+
+export interface IFormField {
+  props: IFormTextFieldProps
+  setValidationResult: (result: String) => void
+  setValue: (value: String) => void
+  validate: () => void
 }
 
 export interface IForm {
   [key: String]: IFormTextFieldProps
   Form: React.Component
   submit: Function
+  addField: (field: IFormFieldArgs) => void
+  removeField: (fieldName: String) => void
 }
 
 export interface IFormErrors {
