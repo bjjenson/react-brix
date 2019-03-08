@@ -1,4 +1,3 @@
-import { formatLabel } from './formatLabel'
 import { actions } from './fieldReducer'
 /**
  * @param  fieldArgs { import("../form").IFormFieldArgs}
@@ -25,7 +24,7 @@ export const useFormField = (state, dispatch, fieldArgs = {}) => {
 
   const setValue = v => {
     dispatch(actions.updateValue(fieldArgs.name, v))
-    tryValidate(v, state.get('touched'))
+    tryValidate(v, state.getIn(['current', 'touched']))
   }
 
   const onChange = ({ target }) => {
@@ -36,7 +35,7 @@ export const useFormField = (state, dispatch, fieldArgs = {}) => {
 
   const onBlur = () => {
     dispatch(actions.touched(fieldArgs.name))
-    tryValidate(state.get('value'), true)
+    tryValidate(state.getIn(['current', 'value']), true)
   }
 
   const setValidationResult = result => {
@@ -44,15 +43,15 @@ export const useFormField = (state, dispatch, fieldArgs = {}) => {
   }
 
   const validate = () => {
-    return tryValidate(state.get('value'), true)
+    return tryValidate(state.getIn(['current', 'value']), true)
   }
 
   return {
     props: {
-      error: state.get('error'),
-      helperText: state.get('helperText'),
-      label: formatLabel(fieldArgs.label, fieldArgs.optional),
-      value: state.get('value'),
+      error: state.getIn(['current', 'error']),
+      helperText: state.getIn(['current', 'helperText']),
+      label: state.getIn(['initial', 'label']),
+      value: state.getIn(['current', 'value']),
       // handlers
       onBlur,
       onChange,

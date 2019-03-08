@@ -48,8 +48,8 @@ beforeEach(() => {
   useFormField.mockImplementation((state) => ({
     ...fieldProps,
     props: {
-      label: state,
-      value: '',
+      label: state.getIn(['initial', 'label']),
+      value: state.getIn(['current', 'value']),
     },
   }))
   createReducer.mockImplementation(({ fields }) => [createState(fields), dispatch])
@@ -91,4 +91,13 @@ test('submit calls worker, merges with initialValues', () => {
   const actual = useForm({ fields, submit: submitWorker, initialValues })
   actual.submit()
   expect(submitWorker.mock.calls[0]).toMatchSnapshot()
+})
+
+test('options passed to createReducer', () => {
+  const options = {
+    optional: 'yes',
+  }
+  useForm({ fields, submit: submitWorker, options })
+
+  expect(createReducer.mock.calls[0]).toMatchSnapshot()
 })

@@ -48,6 +48,16 @@ test('sets optional on field', () => {
   expect(useReducer.mock.calls[0]).toMatchSnapshot()
 })
 
+test('sets optional on field using custom formatter', () => {
+  const optionalLabelFormatter = jest.fn()
+  optionalLabelFormatter.mockReturnValue('label formatted')
+  fields[0].optional = true
+  createReducer({ fields, initialValues, options: { optionalLabelFormatter } })
+
+  expect(optionalLabelFormatter.mock.calls[0]).toMatchSnapshot()
+  expect(useReducer.mock.calls[0]).toMatchSnapshot()
+})
+
 describe('initialValues', () => {
   test('field.value should used if set', () => {
     fields = [

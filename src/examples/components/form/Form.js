@@ -21,13 +21,17 @@ const SwitchField = ({ label, error, helperText, ...rest }) => {
 
 const useInitialValues = () => {
   const getInitialValues = async () => {
+    const values = {
+      isAlive: true,
+      first: 'Paul',
+    }
+    // return values
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(fromJS({
-          isAlive: true,
-        }))
-      }, 2000)
+        resolve(fromJS(values))
+      }, 1000)
     })
+
   }
   return useBrixWorker(['form', 'values'], getInitialValues, Map())
 }
