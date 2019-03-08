@@ -14,11 +14,17 @@ Object {
   "Form": [Function],
   "addField": [Function],
   "name": Object {
-    "label": "current state of name",
+    "label": Immutable.Map {
+      "value": "current value of name",
+      "getAllValues": [Function],
+    },
     "value": "",
   },
   "phone": Object {
-    "label": "current state of phone",
+    "label": Immutable.Map {
+      "value": "current value of phone",
+      "getAllValues": [Function],
+    },
     "value": "",
   },
   "removeField": [Function],

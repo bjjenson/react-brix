@@ -16,14 +16,18 @@ const createState = fields => fromJS({
       type: fields[0].type,
       label: fields[0].label,
     },
-    current: 'current state of name',
+    current: {
+      value: 'current value of name',
+    },
   },
   phone: {
     initial: {
       type: fields[1].type,
       label: fields[1].label,
     },
-    current: 'current state of phone',
+    current: {
+      value: 'current value of phone',
+    },
   },
 })
 

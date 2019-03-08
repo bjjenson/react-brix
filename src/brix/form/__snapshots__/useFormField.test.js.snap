@@ -61,3 +61,19 @@ Object {
   "validate": [Function],
 }
 `;
+
+exports[`validate calls validate on change 1`] = `
+Array [
+  "1",
+  "fieldName",
+  "getAllValuesFunc",
+]
+`;
+
+exports[`validate validates onBlur 1`] = `
+Array [
+  "the value",
+  "fieldName",
+  "getAllValuesFunc",
+]
+`;

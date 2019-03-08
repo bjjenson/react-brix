@@ -10,7 +10,7 @@ export const useFormField = (state, dispatch, fieldArgs = {}) => {
   const tryValidate = (value, touched) => {
     let result
     if (value && fieldArgs.validate) {
-      result = fieldArgs.validate(value, fieldArgs.name)
+      result = fieldArgs.validate(value, fieldArgs.name, state.get('getAllValues'))
     }
 
     if (!Boolean(result) && !fieldArgs.optional && touched && value === '') {
