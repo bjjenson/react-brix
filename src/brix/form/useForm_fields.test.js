@@ -26,7 +26,9 @@ beforeEach(() => {
       initial: {
         type,
       },
-      current: 'state of fieldName',
+      current: {
+        value: 'value of fieldName',
+      },
     },
   })
 

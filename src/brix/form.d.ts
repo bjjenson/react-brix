@@ -6,6 +6,10 @@ export type FieldTypes =
   'select' |
   'number'
 
+export interface IFieldValues {
+  [key: String]: any
+}
+
 export interface IFormFieldArgs<T = String> {
   name: String
   type: FieldTypes
@@ -15,7 +19,7 @@ export interface IFormFieldArgs<T = String> {
   label: String
   normalize?: Function
   value: T
-  validate?: Function
+  validate?: (value: T, fieldName: String, getValues: () => IFieldValues) => String
   options?: Array<ISelectOptions>
   valueFromTarget?: (target: Object) => T
 }

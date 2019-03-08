@@ -22,6 +22,7 @@ beforeEach(() => {
     pristine: true,
     touched: false,
     helperText: initialArgs.helperText,
+    getAllValues: 'getAllValuesFunc',
   })
 })
 
@@ -88,6 +89,7 @@ describe('validate', () => {
       pristine: false,
       touched: true,
       helperText: initialArgs.helperText,
+      getAllValues: 'getAllValuesFunc',
     })
   })
 
@@ -95,7 +97,7 @@ describe('validate', () => {
     const { props: { onChange } } = useFormField(state, dispatch, initialArgs)
     onChange(event)
 
-    expect(validate).toHaveBeenCalledWith(event.target.value, initialArgs.name)
+    expect(validate.mock.calls[0]).toMatchSnapshot()
   })
 
   test('does not set error if not "touched"', () => {
@@ -144,7 +146,7 @@ describe('validate', () => {
     const { props: { onBlur } } = useFormField(state, dispatch, initialArgs)
     onBlur()
 
-    expect(validate).toHaveBeenCalled()
+    expect(validate.mock.calls[0]).toMatchSnapshot()
   })
 
   test('sets required if empty on blur', () => {

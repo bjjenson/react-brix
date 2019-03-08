@@ -7,7 +7,7 @@ export const validateForm = values => {
   return {}
 }
 
-export const validatePhone = phone => {
+export const validatePhone = (phone) => {
   if (phone.startsWith('123')) {
     return 'Phone cannot start with 123'
   }
