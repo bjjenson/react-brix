@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`adds optional to label if not required 1`] = `
-Object {
-  "props": Object {
-    "error": false,
-    "helperText": "the help",
-    "label": "the label (optional)",
-    "onBlur": [Function],
-    "onChange": [Function],
-    "value": "the value",
-  },
-  "setValidationResult": [Function],
-  "setValue": [Function],
-  "validate": [Function],
-}
-`;
-
 exports[`onChange coerces value using normalize 1`] = `
 Array [
   Object {

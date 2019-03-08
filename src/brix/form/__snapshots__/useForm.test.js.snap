@@ -3,8 +3,31 @@
 exports[`no submit if form validation fails 1`] = `
 Array [
   Object {
-    "name": "",
-    "phone": "",
+    "name": "current value of name",
+    "phone": "current value of phone",
+  },
+]
+`;
+
+exports[`options passed to createReducer 1`] = `
+Array [
+  Object {
+    "fields": Array [
+      Object {
+        "label": "The name",
+        "name": "name",
+        "type": "text",
+      },
+      Object {
+        "label": "The phone",
+        "name": "phone",
+        "type": "text",
+      },
+    ],
+    "initialValues": Immutable.Map {},
+    "options": Object {
+      "optional": "yes",
+    },
   },
 ]
 `;
@@ -14,18 +37,12 @@ Object {
   "Form": [Function],
   "addField": [Function],
   "name": Object {
-    "label": Immutable.Map {
-      "value": "current value of name",
-      "getAllValues": [Function],
-    },
-    "value": "",
+    "label": "The name",
+    "value": "current value of name",
   },
   "phone": Object {
-    "label": Immutable.Map {
-      "value": "current value of phone",
-      "getAllValues": [Function],
-    },
-    "value": "",
+    "label": "The phone",
+    "value": "current value of phone",
   },
   "removeField": [Function],
   "setValue": [Function],

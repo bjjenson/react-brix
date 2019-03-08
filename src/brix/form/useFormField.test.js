@@ -17,22 +17,25 @@ beforeEach(() => {
   }
 
   state = fromJS({
-    value,
-    error: false,
-    pristine: true,
-    touched: false,
-    helperText: initialArgs.helperText,
+    initial: {
+      label: initialArgs.label,
+      type: 'text',
+      value,
+      optional: false,
+    },
+    current: {
+      value,
+      error: false,
+      pristine: true,
+      touched: false,
+      helperText: initialArgs.helperText,
+    },
     getAllValues: 'getAllValuesFunc',
   })
 })
 
 test('returns all props needed', () => {
   expect(useFormField(state, dispatch, initialArgs)).toMatchSnapshot()
-})
-
-test('adds optional to label if not required', () => {
-  const actual = useFormField(state, dispatch, { label: 'the label', optional: true })
-  expect(actual).toMatchSnapshot()
 })
 
 describe('onChange', () => {
@@ -84,11 +87,13 @@ describe('validate', () => {
       },
     }
     state = fromJS({
-      value,
-      error: false,
-      pristine: false,
-      touched: true,
-      helperText: initialArgs.helperText,
+      current: {
+        value,
+        error: false,
+        pristine: false,
+        touched: true,
+        helperText: initialArgs.helperText,
+      },
       getAllValues: 'getAllValuesFunc',
     })
   })
@@ -102,11 +107,13 @@ describe('validate', () => {
 
   test('does not set error if not "touched"', () => {
     state = fromJS({
-      value,
-      error: false,
-      pristine: false,
-      touched: false,
-      helperText: initialArgs.helperText,
+      current: {
+        value,
+        error: false,
+        pristine: false,
+        touched: false,
+        helperText: initialArgs.helperText,
+      },
     })
     validate.mockReturnValue('Error here')
 
@@ -151,11 +158,13 @@ describe('validate', () => {
 
   test('sets required if empty on blur', () => {
     state = fromJS({
-      value: '',
-      error: false,
-      pristine: false,
-      touched: true,
-      helperText: initialArgs.helperText,
+      current: {
+        value: '',
+        error: false,
+        pristine: false,
+        touched: true,
+        helperText: initialArgs.helperText,
+      },
     })
 
     const { props: { onBlur } } = useFormField(state, dispatch, initialArgs)
@@ -173,11 +182,13 @@ describe('validate', () => {
 
   test('validate directly', () => {
     state = fromJS({
-      value: '',
-      error: false,
-      pristine: false,
-      touched: false,
-      helperText: initialArgs.helperText,
+      current: {
+        value: '',
+        error: false,
+        pristine: false,
+        touched: false,
+        helperText: initialArgs.helperText,
+      },
     })
 
     const actual = useFormField(state, dispatch, initialArgs)

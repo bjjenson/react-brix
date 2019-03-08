@@ -260,7 +260,63 @@ Array [
         "type": "text",
         "value": "firstValue",
         "optional": true,
-        "label": "First",
+        "label": "First (optional)",
+        "field": Object {
+          "label": "First",
+          "name": "first",
+          "optional": true,
+        },
+      },
+      "current": Immutable.Map {
+        "helperText": "",
+        "error": false,
+        "pristine": true,
+        "touched": false,
+        "value": "firstValue",
+      },
+    },
+    "second": Immutable.Map {
+      "initial": Immutable.Map {
+        "type": "boolean",
+        "value": "secondValue",
+        "optional": false,
+        "label": "Second",
+        "field": Object {
+          "label": "Second",
+          "name": "second",
+          "type": "boolean",
+        },
+      },
+      "current": Immutable.Map {
+        "helperText": "",
+        "error": false,
+        "pristine": true,
+        "touched": false,
+        "value": "secondValue",
+      },
+    },
+  },
+  [Function],
+]
+`;
+
+exports[`sets optional on field using custom formatter 1`] = `
+Array [
+  "First",
+  "first",
+]
+`;
+
+exports[`sets optional on field using custom formatter 2`] = `
+Array [
+  [Function],
+  Immutable.Map {
+    "first": Immutable.Map {
+      "initial": Immutable.Map {
+        "type": "text",
+        "value": "firstValue",
+        "optional": true,
+        "label": "label formatted",
         "field": Object {
           "label": "First",
           "name": "first",

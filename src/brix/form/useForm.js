@@ -12,11 +12,13 @@ import {
 /**
  * @param  param0 { import("../form").IFormProps }
  */
-export const useForm = ({ fields, submit, validate, initialValues = Map() }) => {
-  const [state, dispatch] = createReducer({ fields, initialValues })
+export const useForm = ({ fields, submit, validate, options = {}, initialValues = Map() }) => {
+  const [state, dispatch] = createReducer({ fields, initialValues, options })
 
   const fieldData = state.keySeq().reduce((acc, fieldName) => {
-    const fieldState = state.getIn([fieldName, 'current']).set('getAllValues', () => getFieldValues(fieldData))
+    const fieldState = state.get(fieldName)
+      .set('getAllValues', () => getFieldValues(fieldData))
+
     const fieldType = state.getIn([fieldName, 'initial', 'type'])
     const field = state.getIn([fieldName, 'initial', 'field'])
     switch (fieldType) {

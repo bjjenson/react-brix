@@ -39,6 +39,10 @@ export interface IFormTextFieldProps {
   onChange: Function
 }
 
+export interface IFormOptions {
+  optionalLabelFormatter?: (label: String) => String
+}
+
 export interface IFormField {
   props: IFormTextFieldProps
   setValidationResult: (result: String) => void
@@ -68,6 +72,7 @@ export interface IFormProps {
   submit: (values: IFormValues) => Promise
   validate?: (values: IFormValues) => IFormErrors
   initialValues?: Map<String, any>
+  options?: IFormOptions
 }
 
 export function useForm(props: IFormProps): IForm
