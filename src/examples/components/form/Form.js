@@ -20,20 +20,19 @@ const SwitchField = ({ label, error, helperText, ...rest }) => {
 }
 
 const useInitialValues = () => {
+  const values = fromJS({
+    isAlive: true,
+    first: 'Paul',
+  })
   const getInitialValues = async () => {
-    const values = {
-      isAlive: true,
-      first: 'Paul',
-    }
-    // return values
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(fromJS(values))
+        resolve(values)
       }, 1000)
     })
-
   }
   return useBrixWorker(['form', 'values'], getInitialValues, Map())
+  // return values
 }
 
 const getColorField = i => ({ name: `color${i}`, label: `Color ${i + 1}` })
