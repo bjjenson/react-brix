@@ -33,9 +33,17 @@ test('returns state and setter from brixContext', () => {
   expect(useContext).toHaveBeenCalledWith('brix_context')
 })
 
-test('set updates brix state', () => {
+test('set updates brix state with value', () => {
   const [, set] = useBrix(path, Map())
   set('New Name')
+
+  expect(setBrixState.mock.calls[0]).toMatchSnapshot()
+  expect(setBrixState.mock.results[0]).toMatchSnapshot()
+})
+
+test('set updates brix state with function', () => {
+  const [, set] = useBrix(path, Map())
+  set(name => `updated-${name}`)
 
   expect(setBrixState.mock.calls[0]).toMatchSnapshot()
   expect(setBrixState.mock.results[0]).toMatchSnapshot()
