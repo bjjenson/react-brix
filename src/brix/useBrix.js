@@ -15,7 +15,15 @@ export const useBrix = (path, notSetValue) => {
   const value = state.getIn(path, notSetValue)
 
   const set = updatedValue => {
-    setBrixState(current => current.setIn(path, coerceDataToImmutable(updatedValue)))
+    if (typeof updatedValue === 'function') {
+      setBrixState(current => {
+        const currentValue = current.getIn(path, notSetValue)
+        const newValue = updatedValue(currentValue)
+        return current.setIn(path, coerceDataToImmutable(newValue))
+      })
+    } else {
+      setBrixState(current => current.setIn(path, coerceDataToImmutable(updatedValue)))
+    }
   }
 
   return [value, set]

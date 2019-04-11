@@ -7,13 +7,30 @@ Array [
 ]
 `;
 
-exports[`set updates brix state 1`] = `
+exports[`set updates brix state with function 1`] = `
 Array [
   [Function],
 ]
 `;
 
-exports[`set updates brix state 2`] = `
+exports[`set updates brix state with function 2`] = `
+Object {
+  "isThrow": false,
+  "value": Immutable.Map {
+    "user": Immutable.Map {
+      "name": "updated-My Name",
+    },
+  },
+}
+`;
+
+exports[`set updates brix state with value 1`] = `
+Array [
+  [Function],
+]
+`;
+
+exports[`set updates brix state with value 2`] = `
 Object {
   "isThrow": false,
   "value": Immutable.Map {
