@@ -4,7 +4,7 @@ exports[`returns set 1`] = `[Function]`;
 
 exports[`set updates state at path 1`] = `
 Object {
-  "isThrow": false,
+  "type": "return",
   "value": Immutable.Map {
     "user": Immutable.Map {
       "name": "new name",
