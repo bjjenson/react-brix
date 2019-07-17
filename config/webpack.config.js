@@ -14,7 +14,6 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
     {
       mode,
       entry: [
-        'babel-polyfill',
         './src/examples/index.js',
       ],
       module: {
