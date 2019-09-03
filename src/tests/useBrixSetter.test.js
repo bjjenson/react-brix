@@ -6,7 +6,7 @@ import { useBrixSetter } from '../brix/useBrixSetter'
 jest.mock('../brix/BrixProvider')
 jest.mock('react')
 
-const setBrixState = jest.fn()
+const setState = jest.fn()
 let context, state
 beforeEach(() => {
   state = fromJS({
@@ -16,12 +16,12 @@ beforeEach(() => {
   })
 
   context = {
-    setBrixState,
+    setState,
   }
   useContext.mockReturnValue(context)
   getBrixContext.mockReturnValue('brix_context')
 
-  setBrixState.mockImplementation(getState => {
+  setState.mockImplementation(getState => {
     return getState(state)
   })
 })
@@ -34,5 +34,5 @@ test('set updates state at path', () => {
   const set = useBrixSetter()
 
   set(['user', 'name'], 'new name')
-  expect(setBrixState.mock.results[0]).toMatchSnapshot()
+  expect(setState.mock.results[0]).toMatchSnapshot()
 })

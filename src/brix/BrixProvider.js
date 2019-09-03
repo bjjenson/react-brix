@@ -5,10 +5,10 @@ import { Map } from 'immutable'
 const BrixContext = React.createContext()
 
 export const BrixProvider = ({ value, children }) => {
-  const [state, setBrixState] = useState(value)
+  const [state, setState] = useState(value)
 
   return (
-    <BrixContext.Provider value={{ state, setBrixState }}>
+    <BrixContext.Provider value={{ state, setState }}>
       {children}
     </BrixContext.Provider>
   )

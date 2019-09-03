@@ -1,10 +1,12 @@
 import React from 'react'
 import Name from './components/Name'
 import Summary from './components/Summary'
-import ExtraPanel from './components/ExtraPanel'
+import AsyncDataSample from './components/AsyncDataSample'
 import Notification from './components/Notification'
+import ContextWrapper from './components/NewContextWrapper'
 import { BrixProvider } from '../brix'
 import { initialBrix } from './context'
+
 
 const App = () => {
   return (
@@ -12,8 +14,9 @@ const App = () => {
       <div className='App'>
         <Name />
         <Summary />
-        <ExtraPanel />
+        <AsyncDataSample />
         <Notification />
+        <ContextWrapper />
       </div>
     </BrixProvider>
   )

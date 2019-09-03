@@ -6,7 +6,7 @@ import { getBrixContext } from '../brix/BrixProvider'
 jest.mock('react')
 jest.mock('../brix/BrixProvider')
 
-const setBrixState = jest.fn()
+const setState = jest.fn()
 let context, path
 beforeEach(() => {
   path = ['user', 'name']
@@ -16,13 +16,13 @@ beforeEach(() => {
         name: 'My Name',
       },
     }),
-    setBrixState,
+    setState,
   }
 
   useContext.mockReturnValue(context)
   getBrixContext.mockReturnValue('brix_context')
 
-  setBrixState.mockImplementation(getState => {
+  setState.mockImplementation(getState => {
     return getState(context.state)
   })
 })
@@ -37,14 +37,14 @@ test('set updates brix state with value', () => {
   const [, set] = useBrix(path, Map())
   set('New Name')
 
-  expect(setBrixState.mock.calls[0]).toMatchSnapshot()
-  expect(setBrixState.mock.results[0]).toMatchSnapshot()
+  expect(setState.mock.calls[0]).toMatchSnapshot()
+  expect(setState.mock.results[0]).toMatchSnapshot()
 })
 
 test('set updates brix state with function', () => {
   const [, set] = useBrix(path, Map())
   set(name => `updated-${name}`)
 
-  expect(setBrixState.mock.calls[0]).toMatchSnapshot()
-  expect(setBrixState.mock.results[0]).toMatchSnapshot()
+  expect(setState.mock.calls[0]).toMatchSnapshot()
+  expect(setState.mock.results[0]).toMatchSnapshot()
 })
